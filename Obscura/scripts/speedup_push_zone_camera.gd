@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	var target_direction = target_velocity.normalized()
 	var camera_move = Vector3.ZERO
 
-	
+	# Checks if vessel / target / player is within the speedzone, then the camera should stay the same
 	if target_pos.x > speedup_zone_top_left.x and target_pos.x < speedup_zone_bottom_right.x and target_pos.z > speedup_zone_bottom_right.y and target_pos.z < speedup_zone_top_left.y:
 		return
 		
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	elif target_velocity.z < 0 and target_pos.z > push_box_bottom_right.y:
 		camera_move.z = lerp(camera_move.y, target_pos.y, -push_ratio * delta)
 	
-	# 
+	# Touching the border 
 	if target_pos.x <= push_box_top_left.x or target_pos.x >= push_box_bottom_right.x:
 		camera_move.x = target_speed * delta * target_direction.x
 	if target_pos.z <= push_box_bottom_right.y or target_pos.z >= push_box_top_left.y:
